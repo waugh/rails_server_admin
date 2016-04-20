@@ -1,0 +1,28 @@
+sudo apt-get update # caches.
+
+sudo apt-get remove -y landscape-common
+
+# https://help.ubuntu.com/community/AptGet/Howto
+sudo apt-get upgrade # equivalent of "Mark all upgrades" in Synaptic.
+
+# Compiling, etc.
+
+sudo apt-get install -y git
+sudo apt-get install -y libxslt-dev libxml2-dev # for nokogiri XML parser.
+sudo apt-get install -y libsqlite3-dev
+sudo apt-get install -y imagemagick libmagickcore-dev libmagickwand-dev
+sudo apt-get install -y g++
+sudo apt-get install -y zlib1g-dev  # Already included from above or Xubuntu?
+sudo apt-get install -y libreadline6-dev
+sudo apt-get install -y libssl-dev
+sudo apt-get install -y openssl     # Seems to be present already.
+if test -d /opt/tmp
+then
+  : fine
+else
+  sudo mkdir /opt/tmp # Needed for Warren's deploy procedures.
+  sudo chmod 777 /opt/tmp
+fi
+sudo apt-get install -y autoconf bison build-essential libyaml-dev \
+  libncurses5-dev libffi-dev libgdbm3 libgdbm-dev
+  # Called for in https://github.com/sstephenson/ruby-build/wiki

@@ -1,0 +1,34 @@
+Consider team features on DigitalOcean to relate to clients?
+Starting image on DigitalOcean: Ubuntu 14.04.4 x64.
+Start with $5/mo server, then enlarge flexibly, so that Mp increases but Ms
+doesn't.
+Choose a short hostname that doesn't suggest anything.
+host=162.243.81.248 # for example
+ssh root@$host
+adduser --disabled-password adm --ingroup adm
+adduser adm adm
+adduser adm sudo
+adduser --disabled-password ruby
+project=hprp # for example.
+adduser --disabled-password $project
+oldhost=104.236.29.30
+Populate .ssh in all the users.
+cd .ssh
+for user in adm ruby $project
+do
+  rsync --recursive --relative --links --hard-links --perms \
+    --executability --times --specials --force --devices -a \
+    . /home/$user/.ssh
+  chown $user /home/$user/.ssh /home/$user/.ssh/*
+  chgrp $user /home/$user/.ssh /home/$user/.ssh/*
+done
+User "adm" has to have a password so that it can sudo.
+passwd adm
+for user in adm ruby $project
+do
+  ls -la /home/$user/.ssh
+done
+Test ssh to all users
+ssh adm@$host
+ssh ruby@$host
+ssh $project@$host
