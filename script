@@ -5,6 +5,10 @@ sudo apt-get remove -y landscape-common
 # https://help.ubuntu.com/community/AptGet/Howto
 sudo apt-get upgrade # equivalent of "Mark all upgrades" in Synaptic.
 
+# Networking advanced
+
+sudo apt-get install -y sshfs
+
 # Compiling, etc.
 
 sudo apt-get install -y git
